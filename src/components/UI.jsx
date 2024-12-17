@@ -1,4 +1,9 @@
 import { atom, useAtom } from "jotai";
+import { Loader } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+import { Experience } from "./Experience";
+import { useNavigate } from "react-router-dom";
 
 const pictures = [
   "DSC00680",
@@ -15,8 +20,6 @@ const pictures = [
   "DSC01461",
   "DSC01489",
   "DSC02031",
-  "DSC02064",
-  "DSC02069",
 ];
 
 export const pageAtom = atom(0);
@@ -40,25 +43,29 @@ pages.push({
 
 export const UI = () => {
   const [page, setPage] = useAtom(pageAtom);
+  const navigate = useNavigate(); // React Router navigation function
 
   return (
     <>
-      <main className=" pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col">
+      <main className="pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col">
         <a
           className="pointer-events-auto mt-10 ml-10"
-          href="https://lessons.wawasensei.dev/courses/react-three-fiber"
-        >
-          <img className="w-20" src="/images/wawasensei-white.png" />
-        </a>
+        />
         <div className="w-full overflow-auto pointer-events-auto flex justify-center">
-          <div className="overflow-auto flex items-center gap-4 max-w-full p-10">
+          <div className="overflow-auto flex items-center gap-4 max-w-full p-10">   
+          <button
+              className="analysis-button"
+              onClick={() => navigate("/analysis")}
+            >
+              See Analysis
+            </button>     
             {[...pages].map((_, index) => (
               <button
                 key={index}
                 className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
                   index === page
                     ? "bg-white/90 text-black"
-                    : "bg-black/30 text-white"
+                    : "bg-black/0 text-black"
                 }`}
                 onClick={() => setPage(index)}
               >
@@ -69,7 +76,7 @@ export const UI = () => {
               className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
                 page === pages.length
                   ? "bg-white/90 text-black"
-                  : "bg-black/30 text-white"
+                  : "bg-black/0 text-black"
               }`}
               onClick={() => setPage(pages.length)}
             >
@@ -77,64 +84,33 @@ export const UI = () => {
             </button>
           </div>
         </div>
+        
       </main>
-
-      <div className="fixed inset-0 flex items-center -rotate-2 select-none">
-        <div className="relative">
-          <div className="bg-white/0  animate-horizontal-scroll flex items-center gap-8 w-max px-8">
-            <h1 className="shrink-0 text-white text-10xl font-black ">
-              Wawa Sensei
-            </h1>
-            <h2 className="shrink-0 text-white text-8xl italic font-light">
-              React Three Fiber
-            </h2>
-            <h2 className="shrink-0 text-white text-12xl font-bold">
-              Three.js
-            </h2>
-            <h2 className="shrink-0 text-transparent text-12xl font-bold italic outline-text">
-              Ultimate Guide
-            </h2>
-            <h2 className="shrink-0 text-white text-9xl font-medium">
-              Tutorials
-            </h2>
-            <h2 className="shrink-0 text-white text-9xl font-extralight italic">
-              Learn
-            </h2>
-            <h2 className="shrink-0 text-white text-13xl font-bold">
-              Practice
-            </h2>
-            <h2 className="shrink-0 text-transparent text-13xl font-bold outline-text italic">
-              Creative
-            </h2>
+      <div className="banner">
+              <div className="content">
+                  <div className="item">
+                      <div>
+                          <p>designed & developed by michelle mercer</p>
+                          <p>class 2604: greek mythology</p>
+                      </div>
+                      
+                      
+                  </div>
+                  
+                  <div className="item title">
+                      <p>THE TALE OF</p>
+                      <p>CHEN MANLI</p>
+                  </div>
+              </div>
           </div>
-          <div className="absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max">
-            <h1 className="shrink-0 text-white text-10xl font-black ">
-              Wawa Sensei
-            </h1>
-            <h2 className="shrink-0 text-white text-8xl italic font-light">
-              React Three Fiber
-            </h2>
-            <h2 className="shrink-0 text-white text-12xl font-bold">
-              Three.js
-            </h2>
-            <h2 className="shrink-0 text-transparent text-12xl font-bold italic outline-text">
-              Ultimate Guide
-            </h2>
-            <h2 className="shrink-0 text-white text-9xl font-medium">
-              Tutorials
-            </h2>
-            <h2 className="shrink-0 text-white text-9xl font-extralight italic">
-              Learn
-            </h2>
-            <h2 className="shrink-0 text-white text-13xl font-bold">
-              Practice
-            </h2>
-            <h2 className="shrink-0 text-transparent text-13xl font-bold outline-text italic">
-              Creative
-            </h2>
-          </div>
-        </div>
-      </div>
-    </>
+          <Loader />
+            <Canvas shadows camera={{ position: [-0.5, 1, 4], fov: 45 }}>
+              <group position-y={0}>
+                <Suspense fallback={null}>
+                  <Experience />
+                </Suspense>
+              </group>
+            </Canvas>
+      </>
   );
 };

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap");
+@import url('https://fonts.cdnfonts.com/css/allenia');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,13 +7,259 @@
 #root {
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(#5a47ce, #232323 80%);
+  background: white;
+  position: relative
 }
 
-body {
+/* App Container */
+.app {
+  position: relative;
+}
+
+body, html {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto; /* Ensure vertical scrolling */
+}
+
+/* Fixed Frame for UI and Canvas */
+.fixed-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+  z-index: 10; /* Stays on top of scrollable content */
+  pointer-events: none; /* Allows interaction only on children */
+}
+
+.ui-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.header {
+  width: var(--width);
+  margin: auto;
+  height: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  padding-inline: 20px;
+}
+
+.header nav ul {
+  display: flex;
+}
+
+.header nav ul li.active {
+  border-bottom: 1px solid #eee8;
 }
 
 .outline-text {
   -webkit-text-stroke: 1px white;
+}
+
+#canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 50px); /* Adjust height */
+  pointer-events: none;
+}
+
+/* Scrollable Content */
+.scrollable-content {
+  margin-top: 100vh; /* Pushes this content below the frame */
+  background: #f5f5f5;
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+h1, h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.banner {
+  position: absolute; /* Position the banner absolutely */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Ensure it's behind the book */
+  text-align: center;
+}
+
+.banner .content .item:nth-child(1) {
+  position: absolute;
+  font-weight: 300;
+  text-transform: uppercase;
+  top: 10%;
+  left: 10%;
+  align-items: flex-end;
+  justify-content: left;
+}
+
+.banner .title {
+  position: absolute; /* Ensure the banner is absolutely positioned */
+  top: 30%; /* Position it vertically */
+  left: 50%; /* Position it horizontally */
+  transform: translate(-50%, -50%); /* Center the text */
+  z-index: 0; /* Ensure it is behind the book (book must have a higher z-index) */
+  text-align: center;
+  width: 100%;
+  font-size: 5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: 'Allenia', sans-serif;
+  z-index: 1; /* Place the text behind */
+}
+
+.banner .subtitle {
+  position: absolute; /* Ensure the banner is absolutely positioned */
+  top: 30%; /* Position it vertically */
+  left: 50%; /* Position it horizontally */
+  transform: translate(-50%, -50%); /* Center the text */
+  z-index: 0; /* Ensure it is behind the book (book must have a higher z-index) */
+  text-align: center;
+  width: 100%;
+  font-size: 0.5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: 'Allenia', sans-serif;
+  z-index: 1; /* Place the text behind */
+}
+
+.fixed-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden; /* Ensures no internal scroll */
+  pointer-events: none; /* Allows user interactions to scroll */
+  background-color: white;
+}
+
+.scrollable-content {
+  position: relative;
+  z-index: 2;
+  margin-top: 100vh; /* Offsets content below the fixed frame */
+  padding: 50px;
+  background-color: #f4f4f4;
+  min-height: 200vh; /* Adjust this height for scroll length */
+}
+
+section {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.analysis-button {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.analysis-button:hover {
+  background-color: #555;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Root Container */
+#custom-root {
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+}
+
+/* General Reset */
+.custom-body, .custom-html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto; /* Enable vertical scroll */
+}
+
+/* Page Container */
+.custom-page-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+/* Scrollable Content */
+.custom-scroll-container {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 1rem;
+  background-color: #ffffff;
+  min-height: 200vh; /* Allow scrolling */
+}
+
+/* Header Banner */
+.custom-banner {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #ffffff;
+}
+
+.custom-title {
+  font-size: 4rem;
+  font-family: 'Allenia', sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.custom-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #7a7a7a;
+  margin-bottom: 2rem;
+}
+
+/* Body Text */
+.custom-body-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Navigation Button */
+.custom-nav-button {
+  display: inline-block;
+  padding: 0.6rem 1.8rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-nav-button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }

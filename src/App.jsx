@@ -3,20 +3,20 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { Experience } from "./components/Experience";
 import { UI } from "./components/UI";
+import { Html } from "@react-three/drei"
+import Analysis from "./components/Analysis";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <UI />
-      <Loader />
-      <Canvas shadows camera={{ position: [-0.5, 1, 4], fov: 45 }}>
-        <group position-y={0}>
-          <Suspense fallback={null}>
-            <Experience />
-          </Suspense>
-        </group>
-      </Canvas>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<UI />} /> {/* Home Page */}
+        <Route path="/analysis" element={<Analysis />} /> {/* New Analysis Page */}
+      </Routes>
+    </Router>
+    
+    
   );
 }
 
