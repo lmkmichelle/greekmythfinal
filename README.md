@@ -1,9 +1,5 @@
-# r3f-animated-book-slider-starter
+# Greek Myth Final Project
 
-![YouTube Thumbnail](https://github.com/user-attachments/assets/c6b6ea2e-2643-4d53-89b7-ee5b848de06d)
+Theme credits to Wawa Sensei on YouTube!
 
-[Video tutorial](https://youtu.be/b7a_Y1Ja6js)
-
-[Live demo](https://r3f-animated-book-slider-final.vercel.app/)
-
-[Final code](https://github.com/wass08/r3f-animated-book-slider-final)
+<img width="1512" alt="Screenshot 2024-12-17 at 4 00 01 AM" src="https://github.com/user-attachments/assets/90bc49a1-0d2b-423f-91f7-841f7f5e7419" />
